@@ -1,4 +1,3 @@
-
 let numeroUsuario = 0;
 let intentos = 1; 
 let maxIntentos = 3;
