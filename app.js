@@ -3,7 +3,7 @@ let numeroIntentos = 0;
 let intentos = 0;
 let listaNumSorteado = [];
 let numeroMax = 10;
-let textoMayor = ['El número secreto es mayor, te quedan tres intentos.', 'Unos centímetros más grande.', 'Un poco más, te queda un intento.']
+let textoMayor = ['El número secreto es mayor, te quedan tres intentos.', 'Unos centímetros más grande.', 'Un poco más, te queda un intento.'];
 let textoMenor = ['El número secreto es menor, te quedan tres intentos.', 'Unos centímetros más pequeño.', 'Un poco mas pequeño, te queda un intento'];
 
 function asignarTexto(elemento, texto) {
@@ -14,23 +14,30 @@ function asignarTexto(elemento, texto) {
 
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('numeroUsuario').value);
-    if (numeroSecreto == numeroUsuario){
-        asignarTexto('p',`Acertaste el número en ${intentos+1} ${intentos == 0 ? 'vez' : 'veces'}`);
-        document.getElementById('reiniciar').removeAttribute('disabled');
+    console.log(numeroUsuario);
+    if (!(numeroUsuario >= 1 && numeroUsuario <= 10)){
+        asignarTexto('p','Ingrese un número válido :)');
+        return;
     } else {
-        if (numeroSecreto>numeroUsuario){
-            asignarTexto('p',textoMayor[intentos]);
-        } else {
-            asignarTexto('p',textoMenor[intentos]);
-        }
-        limpiarCaja();
-        intentos++;
-        console.log('Intentos: ', intentos);
-        if (intentos>3){
-            asignarTexto('p',`Llegaste al número máximo de intentos. El número era ${numeroSecreto}.`)
-            document.querySelector('#intentar').setAttribute('disabled', 'true');
+        if (numeroSecreto == numeroUsuario){
+            asignarTexto('p',`Acertaste el número en ${intentos+1} ${intentos == 0 ? 'intento' : 'intentos'}`);
             document.getElementById('reiniciar').removeAttribute('disabled');
-        } 
+            document.querySelector('#intentar').setAttribute('disabled', 'true');
+        } else {
+            if (numeroSecreto>numeroUsuario){
+                asignarTexto('p',textoMayor[intentos]);
+            } else {
+                asignarTexto('p',textoMenor[intentos]);
+            }
+            limpiarCaja();
+            intentos++;
+            console.log('Intentos: ', intentos);
+            if (intentos>3){
+                asignarTexto('p',`Llegaste al número máximo de intentos. El número era ${numeroSecreto}.`);
+                document.querySelector('#intentar').setAttribute('disabled', 'true');
+                document.getElementById('reiniciar').removeAttribute('disabled');
+            } 
+        }
     }
     return;
 }
