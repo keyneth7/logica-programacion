@@ -1,10 +1,10 @@
-let numeroSecreto = 0
-let numeroIntentos = 0
-let intentos = 0
+let numeroSecreto = 0;
+let numeroIntentos = 0;
+let intentos = 0;
 let listaNumSorteado = [];
 let numeroMax = 10;
-let textoMayor = ['El número secreto es mayor, te quedan tres intentos.', 'Es más grande.', 'Unos centímetros más grande.', 'Un poco más, te queda un intento.']
-let textoMenor = ['El número secreto es menor, te quedan tres intentos.', 'Es más pequeño.', 'Unos centímetros más pequeño.', 'Un poco mas pequeño, te queda un intento'];
+let textoMayor = ['El número secreto es mayor, te quedan tres intentos.', 'Unos centímetros más grande.', 'Un poco más, te queda un intento.']
+let textoMenor = ['El número secreto es menor, te quedan tres intentos.', 'Unos centímetros más pequeño.', 'Un poco mas pequeño, te queda un intento'];
 
 function asignarTexto(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
@@ -25,8 +25,8 @@ function verificarIntento() {
         }
         limpiarCaja();
         intentos++;
-        
-        if (intentos>4){
+        console.log('Intentos: ', intentos);
+        if (intentos>3){
             asignarTexto('p',`Llegaste al número máximo de intentos. El número era ${numeroSecreto}.`)
             document.querySelector('#intentar').setAttribute('disabled', 'true');
             document.getElementById('reiniciar').removeAttribute('disabled');
