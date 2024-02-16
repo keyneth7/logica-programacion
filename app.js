@@ -14,9 +14,9 @@ function asignarTexto(elemento, texto) {
 
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('numeroUsuario').value);
-    console.log(numeroUsuario);
+
     if (!(numeroUsuario >= 1 && numeroUsuario <= 10)){
-        asignarTexto('p','Ingrese un número válido :)');
+        asignarTexto('p','Ingresa un número válido :)');
         return;
     } else {
         if (numeroSecreto == numeroUsuario){
@@ -31,7 +31,7 @@ function verificarIntento() {
             }
             limpiarCaja();
             intentos++;
-            console.log('Intentos: ', intentos);
+
             if (intentos>3){
                 asignarTexto('p',`Llegaste al número máximo de intentos. El número era ${numeroSecreto}.`);
                 document.querySelector('#intentar').setAttribute('disabled', 'true');
