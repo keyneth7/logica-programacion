@@ -17,6 +17,7 @@ function verificarIntento() {
 
     if (!(numeroUsuario >= 1 && numeroUsuario <= 10)){
         asignarTexto('p','Ingresa un número válido :)');
+        limpiarCaja();
         return;
     } else {
         if (numeroSecreto == numeroUsuario){
