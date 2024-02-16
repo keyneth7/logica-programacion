@@ -3,6 +3,8 @@ let numeroIntentos = 0
 let intentos = 0
 let listaNumSorteado = [];
 let numeroMax = 10;
+let textoMayor = ['El número secreto es mayor, te quedan tres intentos.', 'Es más grande.', 'Unos centímetros más grande.', 'Un poco más, te queda un intento.']
+let textoMenor = ['El número secreto es menor, te quedan tres intentos.', 'Es más pequeño.', 'Unos centímetros más pequeño.', 'Un poco mas pequeño, te queda un intento'];
 
 function asignarTexto(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
@@ -13,17 +15,22 @@ function asignarTexto(elemento, texto) {
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('numeroUsuario').value);
     if (numeroSecreto == numeroUsuario){
-        asignarTexto('p',`Acertaste el número en ${intentos} ${intentos == 1 ? 'vez' : 'veces'}`);
+        asignarTexto('p',`Acertaste el número en ${intentos+1} ${intentos == 0 ? 'vez' : 'veces'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
         if (numeroSecreto>numeroUsuario){
-            asignarTexto('p','El número secreto es mayor');
+            asignarTexto('p',textoMayor[intentos]);
         } else {
-            asignarTexto('p','El número secreto es menor');
+            asignarTexto('p',textoMenor[intentos]);
         }
         limpiarCaja();
         intentos++;
-        console.log(intentos);
+        
+        if (intentos>4){
+            asignarTexto('p',`Llegaste al número máximo de intentos. El número era ${numeroSecreto}.`)
+            document.querySelector('#intentar').setAttribute('disabled', 'true');
+            document.getElementById('reiniciar').removeAttribute('disabled');
+        } 
     }
     return;
 }
@@ -54,13 +61,14 @@ function condicionesIniciales(){
     asignarTexto('h1', 'Juego del número secreto');
     asignarTexto('p', `Indica un número del 1 al ${numeroMax}`);
     numeroSecreto = generarNumero();
-    intentos = 1;
+    intentos = 0;
 }
 
 function reiniciarJuego(){
     limpiarCaja();
     condicionesIniciales();
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
+    document.getElementById('intentar').removeAttribute('disabled');
 }
 
 condicionesIniciales();
